@@ -7,7 +7,7 @@ void main() => runApp(DrawApp());
 
 class DrawApp extends StatelessWidget {
 
-  static String _pkg = "draw-master";
+  static String _pkg = "kids-coaching-connection-app";
   static String get pkg => Env.getPackage(_pkg);
 
   @override

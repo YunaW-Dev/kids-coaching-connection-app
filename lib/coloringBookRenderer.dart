@@ -33,15 +33,15 @@ class ColoringBookRenderer extends StatelessWidget {
             ),
           ),
           // City image, out of card by 15px
-          Positioned(top: -15, child: _buildCityImage()),
+          Positioned(top: -15, child: _buildArtImage()),
           // City information
-          _buildCityData()
+          _buildArtData()
         ],
       ),
     );
   }
 
-  Widget _buildCityImage() {
+  Widget _buildArtImage() {
     double maxParallax = 30;
     double globalOffset = offset * maxParallax * 2;
     double cardPadding = 28;
@@ -60,7 +60,7 @@ class ColoringBookRenderer extends StatelessWidget {
     );
   }
 
-  Widget _buildCityData() {
+  Widget _buildArtData() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -78,7 +78,7 @@ class ColoringBookRenderer extends StatelessWidget {
         FlatButton(
           disabledColor: Colors.transparent,
           color: Colors.transparent,
-          child: Text(''.toUpperCase(), style: Styles.cardAction),
+          child: Text('link'.toUpperCase(), style: Styles.cardAction),
           onPressed: null,
         ),
         SizedBox(height: 8)

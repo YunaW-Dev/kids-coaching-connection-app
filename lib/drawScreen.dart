@@ -4,10 +4,15 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'data.dart';
+import 'coloringBookRenderer.dart';
 
 
 
 class Draw extends StatefulWidget {
+
+//  final Art art;
+
   @override
   _DrawState createState() => _DrawState();
 }
@@ -21,7 +26,7 @@ class _DrawState extends State<Draw> {
   double strokeWidth = 3.0;
   List<DrawingPoints> points = List();
   bool showBottomList = false;
-  double opacity = 1.0;
+  double opacity = 0.1;
   StrokeCap strokeCap = (Platform.isAndroid) ? StrokeCap.round : StrokeCap.square;
   SelectedMode selectedMode = SelectedMode.StrokeWidth;
   List<Color> colors = [
@@ -38,8 +43,8 @@ class _DrawState extends State<Draw> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          _buildDrawingBoard(),
           _bodyWidget(),
+          _buildDrawingBoard(),
         ],
       ),
     );
@@ -57,7 +62,7 @@ class _DrawState extends State<Draw> {
               padding: const EdgeInsets.only(left: 6.0, right: 6.0),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(33.0),
-                  color: Colors.greenAccent),
+                  color: Colors.yellowAccent),
               child: Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Column(
@@ -151,42 +156,59 @@ class _DrawState extends State<Draw> {
                 ),
               )),
         ),
-        body: GestureDetector(
-          onPanUpdate: (details) {
-            setState(() {
-              RenderBox renderBox = context.findRenderObject();
-              points.add(DrawingPoints(
-                  points: renderBox.globalToLocal(details.globalPosition),
-                  paint: Paint()
-                    ..strokeCap = strokeCap
-                    ..isAntiAlias = true
-                    ..color = selectedColor.withOpacity(opacity)
-                    ..strokeWidth = strokeWidth));
-            });
-          },
-          onPanStart: (details) {
-            setState(() {
-              RenderBox renderBox = context.findRenderObject();
-              points.add(DrawingPoints(
-                  points: renderBox.globalToLocal(details.globalPosition),
-                  paint: Paint()
-                    ..strokeCap = strokeCap
-                    ..isAntiAlias = true
-                    ..color = selectedColor.withOpacity(opacity)
-                    ..strokeWidth = strokeWidth));
-            });
-          },
-          onPanEnd: (details) {
-            setState(() {
-              points.add(null);
-            });
-          },
-          child: CustomPaint(
-            size: Size.infinite,
-            painter: DrawingPainter(
-              pointsList: points,
-            ),
-          ),
+        body: Center(
+          child: Stack(
+            children: <Widget>[
+
+              Container(
+//                color: Colors.grey.withOpacity(0.1),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+//                      'images/${art.title}-Middle.png'
+                          'images/I AM Curious-Draw.png'
+                    ),
+                  )
+                ),
+
+              ),
+              GestureDetector(
+                onPanUpdate: (details) {
+                  setState(() {
+                    RenderBox renderBox = context.findRenderObject();
+                    points.add(DrawingPoints(
+                        points: renderBox.globalToLocal(details.globalPosition),
+                        paint: Paint()
+                          ..strokeCap = strokeCap
+                          ..isAntiAlias = true
+                          ..color = selectedColor.withOpacity(opacity)
+                          ..strokeWidth = strokeWidth
+                    ));
+                  });
+                },
+                onPanStart: (details) {
+                  setState(() {
+                    RenderBox renderBox = context.findRenderObject();
+                    points.add(DrawingPoints(
+                        points: renderBox.globalToLocal(details.globalPosition),
+                        paint: Paint()
+                          ..strokeCap = strokeCap
+                          ..isAntiAlias = true
+                          ..color = selectedColor.withOpacity(opacity)
+                          ..strokeWidth = strokeWidth));
+                  });
+                },
+                onPanEnd: (details) {
+                  setState(() {
+                    points.add(null);
+                  });
+                },
+                child: CustomPaint(
+                  size: Size.infinite,
+                  painter: DrawingPainter(
+                    pointsList: points,
+                  ),
+                ),
 //            child: Container(
 //              height: MediaQuery.of(context).size.height,
 //              width: MediaQuery.of(context).size.width,
@@ -199,6 +221,11 @@ class _DrawState extends State<Draw> {
 //              ),
 //            ),
 
+              ),
+
+
+            ],
+          ),
         ),
       );
 
