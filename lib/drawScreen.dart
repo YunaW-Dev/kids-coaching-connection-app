@@ -7,7 +7,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'data.dart';
 import 'coloringBookRenderer.dart';
 
-
+//1. pay for the cards and get app free
+//2. free to use, pay to unlock
 
 class Draw extends StatefulWidget {
 
@@ -62,7 +63,7 @@ class _DrawState extends State<Draw> {
               padding: const EdgeInsets.only(left: 6.0, right: 6.0),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(33.0),
-                  color: Colors.yellowAccent),
+                  color: Colors.orangeAccent),
               child: Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Column(
@@ -165,7 +166,6 @@ class _DrawState extends State<Draw> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(
-//                      'images/${art.title}-Middle.png'
                           'images/I AM Curious-Draw.png'
                     ),
                   )
